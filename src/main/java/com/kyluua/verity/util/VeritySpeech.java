@@ -45,6 +45,12 @@ public final class VeritySpeech {
         }
     }
 
+    /** Sends a raw (non-dialogue) line from Verity to one player. */
+    public static void say(ServerPlayer player, String text, boolean corrupted) {
+        player.sendSystemMessage(prefix(corrupted).copy().append(
+                Component.literal(text).withStyle(corrupted ? ChatFormatting.RED : ChatFormatting.WHITE)));
+    }
+
     /** Resolves a {@code verity:<name>} sound by id, or null if blank/unknown. */
     @Nullable
     public static SoundEvent lookupSound(@Nullable String name) {
