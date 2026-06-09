@@ -36,7 +36,12 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
-            modSource project.sourceSets.main
+            // ForgeGradle: register this project's source set as the mod under test.
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
         }
 
         client {
@@ -51,7 +56,7 @@ minecraft {
 
         // Runs data generators (loot tables, etc.) if you add any DataProviders.
         data {
-            programArguments.addAll '--mod', mod_id, '--all',
+            args '--mod', mod_id, '--all',
                     '--output', file('src/generated/resources/').getAbsolutePath(),
                     '--existing', file('src/main/resources/').getAbsolutePath()
         }
@@ -72,7 +77,9 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     // GeckoLib - 3D model + animation engine used for Verity's entities.
-    implementation "software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}"
+    // fg.deobf remaps GeckoLib's published (production-mapped) jar into the dev
+    // mappings so it compiles and runs in this workspace.
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
 }
 
 // Expand placeholders in mods.toml (modid, version, dependency ranges, ...).

@@ -47,7 +47,7 @@ your `mods/` folder (and on the server too, for multiplayer).
 |------|-----------------|-------|
 | **Verity** (this mod) | **[Releases →](https://github.com/kylevoluu-hue/horror-mods-by-kyluua/releases)** · **[latest CI build →](https://github.com/kylevoluu-hue/horror-mods-by-kyluua/actions/workflows/build.yml)** | `verity-forge-1.21.1-*.jar`. Releases are published automatically when a `v*` tag is pushed; until then, grab the jar from the newest green **Build** run (Actions → Artifacts) or [build from source](#building-from-source). |
 | **Minecraft Forge 52.1.x** | **[files.minecraftforge.net (1.21.1) →](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.21.1.html)** | The mod loader. Install the **1.21.1** version. |
-| **GeckoLib** (required library) | **[Modrinth →](https://modrinth.com/mod/geckolib)** · **[CurseForge →](https://www.curseforge.com/minecraft/mc-mods/geckolib)** | Animation engine Verity depends on. Use the **Forge 1.21.1** build (4.7.x). |
+| **GeckoLib** (required library) | **[Modrinth →](https://modrinth.com/mod/geckolib)** · **[CurseForge →](https://www.curseforge.com/minecraft/mc-mods/geckolib)** | Animation engine Verity depends on. Use the **Forge 1.21.1** build (4.8.x). |
 
 > **Verity will not load without GeckoLib.** Install both jars, on every client
 > **and** the server. Full step-by-step in [Installation](#installation).
