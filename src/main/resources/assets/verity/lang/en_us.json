@@ -1,0 +1,33 @@
+{
+  "itemGroup.verity": "Verity",
+
+  "item.verity.verity_box": "Verity Box",
+
+  "entity.verity.verity_companion": "Verity",
+  "entity.verity.verity_boss": "Verity",
+  "entity.verity.hallucination": "?",
+
+  "message.verity.received_box": "A small cardboard box has arrived in your inventory. Something inside is moving.",
+
+  "screen.verity.ask": "Ask Verity",
+  "screen.verity.hint": "Type something to ask Verity...",
+  "screen.verity.send": "Send",
+
+  "key.categories.verity": "Verity",
+  "key.verity.ask": "Ask Verity",
+
+  "subtitles.verity.voice_letmeout": "Verity: Hey, let me out!",
+  "subtitles.verity.voice_friendly": "Verity speaks warmly",
+  "subtitles.verity.voice_unsettling": "Verity speaks... oddly",
+  "subtitles.verity.voice_psych": "Verity whispers",
+  "subtitles.verity.voice_hostile": "Verity distorts",
+  "subtitles.verity.whisper": "A whisper",
+  "subtitles.verity.ambient_drone": "An uneasy drone",
+  "subtitles.verity.ambient_distorted": "Distorted noise",
+  "subtitles.verity.heartbeat": "A heartbeat",
+  "subtitles.verity.jumpscare_stinger": "!",
+  "subtitles.verity.glitch": "Reality glitches",
+  "subtitles.verity.boss_spawn": "Something arrives",
+  "subtitles.verity.boss_music": "Eerie music",
+  "subtitles.verity.boss_roar": "Verity screams"
+}

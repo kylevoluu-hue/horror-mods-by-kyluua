@@ -1,0 +1,31 @@
+{
+  "_comment": "PLACEHOLDER geometry for the tall humanoid boss. Replace with a proper Blockbench model (very tall, thin, long arms) - see docs/ASSETS.md. Bone names match the animation file.",
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.verity_boss",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 7,
+        "visible_bounds_offset": [0, 3, 0]
+      },
+      "bones": [
+        { "name": "root", "pivot": [0, 0, 0] },
+        { "name": "body", "parent": "root", "pivot": [0, 24, 0],
+          "cubes": [ { "origin": [-3, 24, -1.5], "size": [6, 20, 3], "uv": [0, 0] } ] },
+        { "name": "head", "parent": "body", "pivot": [0, 44, 0],
+          "cubes": [ { "origin": [-3, 44, -3], "size": [6, 7, 6], "uv": [0, 24] } ] },
+        { "name": "armLeft", "parent": "body", "pivot": [3, 43, 0],
+          "cubes": [ { "origin": [3, 19, -1.5], "size": [3, 24, 3], "uv": [24, 0] } ] },
+        { "name": "armRight", "parent": "body", "pivot": [-3, 43, 0],
+          "cubes": [ { "origin": [-6, 19, -1.5], "size": [3, 24, 3], "uv": [24, 0] } ] },
+        { "name": "legLeft", "parent": "root", "pivot": [1.5, 24, 0],
+          "cubes": [ { "origin": [0, 0, -1.5], "size": [3, 24, 3], "uv": [36, 0] } ] },
+        { "name": "legRight", "parent": "root", "pivot": [-1.5, 24, 0],
+          "cubes": [ { "origin": [-3, 0, -1.5], "size": [3, 24, 3], "uv": [36, 0] } ] }
+      ]
+    }
+  ]
+}

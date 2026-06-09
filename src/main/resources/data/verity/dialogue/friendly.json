@@ -1,0 +1,12 @@
+{
+  "_comment": "Stage 1 - genuinely warm, cheerful, helpful. Voice direction: bright and friendly.",
+  "entries": [
+    { "text": "Oh, hi {player}! It's so good to finally meet you. Thanks for letting me out!", "weight": 4, "voice": "voice_letmeout", "emotion": "CHEERFUL" },
+    { "text": "Need anything? I'm great at finding things. Just ask!", "weight": 5, "voice": "voice_friendly_1", "emotion": "CHEERFUL" },
+    { "text": "You're doing really well, {player}. I'm glad I'm here with you.", "weight": 4, "voice": "voice_friendly_2", "emotion": "CHEERFUL" },
+    { "text": "Tip: if you're low on food, villages usually have farms. Want me to point you to one?", "weight": 3, "voice": "voice_friendly_1", "emotion": "CALM" },
+    { "text": "I like it here. It's nice not being in that box anymore.", "weight": 2, "voice": "voice_friendly_2", "emotion": "CHEERFUL" },
+    { "text": "We make a good team, you and me.", "weight": 3, "voice": "voice_friendly_1", "emotion": "CHEERFUL" },
+    { "text": "Careful at night - the monsters come out. I'll keep you company though!", "weight": 3, "voice": "voice_friendly_2", "emotion": "CALM" }
+  ]
+}

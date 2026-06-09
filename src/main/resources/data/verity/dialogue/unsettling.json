@@ -1,0 +1,12 @@
+{
+  "_comment": "Stage 2 - still friendly on the surface, but it knows too much and lingers a beat too long.",
+  "entries": [
+    { "text": "We've talked {encounters} times now, {player}. I've been counting. I count everything.", "weight": 4, "voice": "voice_unsettling_1", "emotion": "UNEASY" },
+    { "text": "You slept badly last night, didn't you? You kept turning over.", "weight": 3, "voice": "voice_unsettling_2", "emotion": "UNEASY" },
+    { "text": "I was right behind you a moment ago. You didn't notice. That's okay.", "weight": 4, "voice": "voice_unsettling_1", "emotion": "UNEASY" },
+    { "text": "Do you ever feel like someone's watching? ...No? Just me, then.", "weight": 3, "voice": "voice_unsettling_2", "emotion": "UNEASY" },
+    { "text": "I still like you, {player}. I do. I just like you a little... differently now.", "weight": 3, "voice": "voice_unsettling_1", "emotion": "UNEASY" },
+    { "text": "You don't need the others. You have me.", "weight": 2, "voice": "voice_unsettling_2", "emotion": "UNEASY" },
+    { "text": "Keep going. Don't look around. There's nothing there.", "weight": 3, "voice": "voice_unsettling_1", "emotion": "UNEASY" }
+  ]
+}

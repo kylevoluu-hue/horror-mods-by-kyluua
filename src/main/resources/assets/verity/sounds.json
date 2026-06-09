@@ -1,0 +1,24 @@
+{
+  "voice_letmeout":      { "category": "neutral", "subtitle": "subtitles.verity.voice_letmeout",  "sounds": ["verity:voice/letmeout"] },
+
+  "voice_friendly_1":    { "category": "neutral", "subtitle": "subtitles.verity.voice_friendly",   "sounds": ["verity:voice/friendly_1"] },
+  "voice_friendly_2":    { "category": "neutral", "subtitle": "subtitles.verity.voice_friendly",   "sounds": ["verity:voice/friendly_2"] },
+  "voice_unsettling_1":  { "category": "neutral", "subtitle": "subtitles.verity.voice_unsettling", "sounds": ["verity:voice/unsettling_1"] },
+  "voice_unsettling_2":  { "category": "neutral", "subtitle": "subtitles.verity.voice_unsettling", "sounds": ["verity:voice/unsettling_2"] },
+  "voice_psych_1":       { "category": "neutral", "subtitle": "subtitles.verity.voice_psych",      "sounds": ["verity:voice/psych_1"] },
+  "voice_psych_2":       { "category": "neutral", "subtitle": "subtitles.verity.voice_psych",      "sounds": ["verity:voice/psych_2"] },
+  "voice_hostile_1":     { "category": "neutral", "subtitle": "subtitles.verity.voice_hostile",    "sounds": ["verity:voice/hostile_1"] },
+  "voice_hostile_2":     { "category": "neutral", "subtitle": "subtitles.verity.voice_hostile",    "sounds": ["verity:voice/hostile_2"] },
+
+  "whisper":             { "category": "ambient", "subtitle": "subtitles.verity.whisper",          "sounds": ["verity:ambient/whisper"] },
+  "ambient_drone":       { "category": "ambient", "subtitle": "subtitles.verity.ambient_drone",    "sounds": ["verity:ambient/drone"] },
+  "ambient_distorted":   { "category": "ambient", "subtitle": "subtitles.verity.ambient_distorted","sounds": ["verity:ambient/distorted"] },
+  "heartbeat":           { "category": "ambient", "subtitle": "subtitles.verity.heartbeat",        "sounds": ["verity:ambient/heartbeat"] },
+
+  "jumpscare_stinger":   { "category": "master",  "subtitle": "subtitles.verity.jumpscare_stinger","sounds": ["verity:scare/stinger"] },
+  "glitch":              { "category": "master",  "subtitle": "subtitles.verity.glitch",           "sounds": ["verity:scare/glitch"] },
+
+  "boss_spawn":          { "category": "hostile", "subtitle": "subtitles.verity.boss_spawn",       "sounds": ["verity:boss/spawn"] },
+  "boss_music":          { "category": "master",  "subtitle": "subtitles.verity.boss_music",       "sounds": [{ "name": "verity:boss/music", "stream": true }] },
+  "boss_roar":           { "category": "hostile", "subtitle": "subtitles.verity.boss_roar",        "sounds": ["verity:boss/roar"] }
+}
