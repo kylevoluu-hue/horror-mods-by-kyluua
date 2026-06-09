@@ -9,6 +9,11 @@ import com.kyluua.verity.progression.CorruptionData;
 import com.kyluua.verity.registry.VerityEntities;
 import com.kyluua.verity.registry.VeritySounds;
 import com.kyluua.verity.registry.VerityItems;
+import com.kyluua.verity.dialogue.DialogueEntry;
+import com.kyluua.verity.dialogue.DialogueManager;
+import com.kyluua.verity.progression.CorruptionStage;
+import com.kyluua.verity.util.VeritySpeech;
+import net.neoforged.neoforge.event.ServerChatEvent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -148,6 +153,32 @@ public final class ServerEvents {
         }
         player.sendSystemMessage(Component.translatable("message.verity.received_box")
                 .withStyle(ChatFormatting.GRAY));
+    }
+
+    // =========================================================================
+    //  Chat: Verity answers when a player talks and a companion is nearby.
+    // =========================================================================
+    @SubscribeEvent
+    public void onPlayerChat(ServerChatEvent event) {
+        ServerPlayer player = event.getPlayer();
+        if (player == null) return;
+        ServerLevel level = player.serverLevel();
+
+        // Verity only "hears" you when a companion is reasonably close.
+        boolean listening = !level.getEntitiesOfClass(
+                VerityCompanionEntity.class, player.getBoundingBox().inflate(48.0D)).isEmpty();
+        if (!listening) return;
+
+        CorruptionData data = CorruptionData.get(level);
+        data.addInteraction(0.5D);     // talking to Verity feeds the corruption
+        data.recordEncounter(player);
+
+        CorruptionStage stage = data.getStage();
+        DialogueEntry reply = DialogueManager.get().pickForStage(stage, player, data);
+        if (reply == null) return;
+
+        // Reply just after the player's own message is broadcast.
+        player.server.execute(() -> VeritySpeech.speak(player, reply, stage.isHorror()));
     }
 
     /** Used by /verity reset to also clear the broadcast cache. */
