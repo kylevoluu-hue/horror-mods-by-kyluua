@@ -51,10 +51,8 @@ public class DialogueManager extends SimpleJsonResourceReloadListener {
 
     private static final int RECENT_MEMORY = 5;
 
-    private static final Gson GSON = new Gson();
-
     private DialogueManager() {
-        super(GSON, "dialogue");
+        super(new Gson(), "dialogue");
     }
 
     public static DialogueManager get() {
