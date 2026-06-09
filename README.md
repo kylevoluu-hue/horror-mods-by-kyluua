@@ -45,7 +45,7 @@ your `mods/` folder (and on the server too, for multiplayer).
 
 | File | Where to get it | Notes |
 |------|-----------------|-------|
-| **Verity** (this mod) | **[Releases →](https://github.com/kylevoluu-hue/horror-mods-by-kyluua/releases)** · **[latest CI build →](https://github.com/kylevoluu-hue/horror-mods-by-kyluua/actions/workflows/build.yml)** | `verity-forge-1.21.1-*.jar`. Releases are published automatically when a `v*` tag is pushed; until then, grab the jar from the newest green **Build** run (Actions → Artifacts) or [build from source](#building-from-source). |
+| **Verity** (this mod) | [Build from source](#building-from-source) | The mod is distributed as source on this branch. Run `./gradlew build` to produce `verity-forge-1.21.1-*.jar` in `build/libs/`. |
 | **Minecraft Forge 52.1.x** | **[files.minecraftforge.net (1.21.1) →](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.21.1.html)** | The mod loader. Install the **1.21.1** version. |
 | **GeckoLib** (required library) | **[Modrinth →](https://modrinth.com/mod/geckolib)** · **[CurseForge →](https://www.curseforge.com/minecraft/mc-mods/geckolib)** | Animation engine Verity depends on. Use the **Forge 1.21.1** build (4.8.x). |
 
@@ -179,23 +179,6 @@ Useful run tasks (launch straight from the project):
 
 See [`docs/BUILDING.md`](docs/BUILDING.md) for a step-by-step walkthrough and
 troubleshooting.
-
-### Automated builds & releases (GitHub Actions)
-
-This repo ships two workflows in [`.github/workflows/`](.github/workflows):
-
-- **Build** (`build.yml`) — runs on every push/PR, compiles with JDK 21 + Gradle
-  8.8, and uploads the jar as a downloadable artifact (Actions → a run → Artifacts).
-- **Release** (`release.yml`) — builds and publishes a GitHub Release with the jar
-  attached. To cut a release:
-
-  ```bash
-  git tag v1.0.0
-  git push origin v1.0.0
-  ```
-
-  (or run the **Release** workflow manually from the Actions tab and supply a tag).
-  The jar then appears on the [Releases](https://github.com/kylevoluu-hue/horror-mods-by-kyluua/releases) page.
 
 ---
 
