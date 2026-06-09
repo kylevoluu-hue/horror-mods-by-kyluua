@@ -1,0 +1,41 @@
+{
+  "_comment": "PLACEHOLDER animations for the smiley. Gentle bob while idle/floating, a still 'stare', and a wobble 'distort' overlay. Replace/expand in Blockbench.",
+  "format_version": "1.8.0",
+  "animations": {
+    "idle": {
+      "loop": true,
+      "animation_length": 3.0,
+      "bones": {
+        "body": {
+          "position": { "0.0": [0, 0, 0], "1.5": [0, 1.2, 0], "3.0": [0, 0, 0] },
+          "rotation": { "0.0": [0, 0, 0], "1.5": [0, 8, 0], "3.0": [0, 0, 0] }
+        }
+      }
+    },
+    "float": {
+      "loop": true,
+      "animation_length": 2.0,
+      "bones": {
+        "body": {
+          "position": { "0.0": [0, 0, 0], "1.0": [0, 1.6, 0], "2.0": [0, 0, 0] }
+        }
+      }
+    },
+    "stare": {
+      "loop": true,
+      "animation_length": 1.0,
+      "bones": {
+        "body": { "position": { "0.0": [0, 0, 0] } }
+      }
+    },
+    "distort": {
+      "loop": true,
+      "animation_length": 0.6,
+      "bones": {
+        "body": {
+          "rotation": { "0.0": [0, 0, 0], "0.15": [4, 0, -3], "0.3": [-3, 0, 4], "0.45": [2, 0, -2], "0.6": [0, 0, 0] }
+        }
+      }
+    }
+  }
+}

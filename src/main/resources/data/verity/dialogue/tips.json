@@ -1,0 +1,10 @@
+{
+  "_comment": "Genuinely useful gameplay tips, used in the friendly stage to make Verity feel helpful.",
+  "entries": [
+    { "text": "Coal and iron are most common around y=16 to y=48. Bring torches!", "weight": 3, "voice": "voice_friendly_1", "emotion": "CALM" },
+    { "text": "Diamonds love deepslate. Try y=-59 with full iron gear.", "weight": 3, "voice": "voice_friendly_2", "emotion": "CALM" },
+    { "text": "A bed sets your spawn. Sleep before you go too far.", "weight": 3, "voice": "voice_friendly_1", "emotion": "CALM" },
+    { "text": "Villagers will trade with you. Emeralds are basically money.", "weight": 2, "voice": "voice_friendly_2", "emotion": "CALM" },
+    { "text": "Creepers hate cats. Keep one close to your base.", "weight": 2, "voice": "voice_friendly_1", "emotion": "CHEERFUL" }
+  ]
+}

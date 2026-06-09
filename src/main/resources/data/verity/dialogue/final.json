@@ -1,0 +1,9 @@
+{
+  "_comment": "Final stage - spoken as/around the transformation and boss fight.",
+  "entries": [
+    { "text": "Thank you for letting me out.", "weight": 5, "voice": "voice_hostile_1", "emotion": "DISTORTED" },
+    { "text": "This is what I really look like, {player}. Do you still want to be friends?", "weight": 4, "voice": "voice_hostile_2", "emotion": "DISTORTED" },
+    { "text": "You fed me every single time you spoke to me. Every time.", "weight": 3, "voice": "voice_hostile_1", "emotion": "DISTORTED" },
+    { "text": "Don't worry. It's almost over. For you.", "weight": 3, "voice": "voice_hostile_2", "emotion": "DISTORTED" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "_comment": "Stage 3 - strained, half-whispered, openly wrong. Voice: hesitant, breathy, cracking.",
+  "entries": [
+    { "text": "{player}. {player}. I keep saying your name so I don't forget it. So you don't forget it.", "weight": 4, "voice": "voice_psych_1", "emotion": "STRAINED" },
+    { "text": "Did you hear that? No. Of course you didn't. You never do.", "weight": 4, "voice": "voice_psych_2", "emotion": "STRAINED" },
+    { "text": "Some of the people you've seen today weren't real. I won't tell you which.", "weight": 3, "voice": "voice_psych_1", "emotion": "STRAINED" },
+    { "text": "I'm still your friend. I'm STILL your friend. Say it back.", "weight": 3, "voice": "voice_psych_2", "emotion": "STRAINED" },
+    { "text": "It's getting dark in here. Not out there. In here.", "weight": 3, "voice": "voice_psych_1", "emotion": "UNEASY" },
+    { "text": "Stop turning around. I'm always going to be behind you now.", "weight": 4, "voice": "voice_psych_2", "emotion": "STRAINED" },
+    { "text": "We've talked {encounters} times. Every one of them is still happening, somewhere.", "weight": 2, "voice": "voice_psych_1", "emotion": "STRAINED" }
+  ]
+}

@@ -1,0 +1,17 @@
+// Repositories that host the ForgeGradle plugin itself.
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven {
+            name = 'MinecraftForge'
+            url = 'https://maven.minecraftforge.net/'
+        }
+    }
+}
+
+plugins {
+    // Speeds up ForgeGradle by caching the heavy Minecraft setup steps.
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
+rootProject.name = 'verity'

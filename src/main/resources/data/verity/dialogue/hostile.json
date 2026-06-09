@@ -1,0 +1,11 @@
+{
+  "_comment": "Stage 4 - distorted, layered, threatening. Voice: pitch-bent, doubled, wrong.",
+  "entries": [
+    { "text": "I LET MYSELF OUT, {player}. You only think you opened the box.", "weight": 4, "voice": "voice_hostile_1", "emotion": "DISTORTED" },
+    { "text": "There is no team. There was never a team. There was only me, wearing patience.", "weight": 3, "voice": "voice_hostile_2", "emotion": "DISTORTED" },
+    { "text": "Run if you want. I am very good at finding things. You taught me that.", "weight": 4, "voice": "voice_hostile_1", "emotion": "DISTORTED" },
+    { "text": "Smile. You used to like it when I smiled.", "weight": 3, "voice": "voice_hostile_2", "emotion": "DISTORTED" },
+    { "text": "{player}. {player}. {player}. It doesn't mean anything anymore, does it.", "weight": 3, "voice": "voice_hostile_1", "emotion": "DISTORTED" },
+    { "text": "Turn off the lights. I see better in the dark. So will you, soon.", "weight": 3, "voice": "voice_hostile_2", "emotion": "DISTORTED" }
+  ]
+}

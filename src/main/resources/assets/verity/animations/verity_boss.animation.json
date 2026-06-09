@@ -1,0 +1,48 @@
+{
+  "_comment": "PLACEHOLDER animations for the boss + hallucination silhouette. Replace with proper Blockbench animations (unnatural, jittery movement). Includes 'stare' so the hallucination renderer can reuse this file.",
+  "format_version": "1.8.0",
+  "animations": {
+    "idle": {
+      "loop": true,
+      "animation_length": 4.0,
+      "bones": {
+        "body": { "rotation": { "0.0": [0, 0, 0], "2.0": [2, 0, 1], "4.0": [0, 0, 0] } },
+        "head": { "rotation": { "0.0": [0, -6, 0], "2.0": [0, 6, 0], "4.0": [0, -6, 0] } }
+      }
+    },
+    "walk": {
+      "loop": true,
+      "animation_length": 1.6,
+      "bones": {
+        "legLeft":  { "rotation": { "0.0": [25, 0, 0], "0.8": [-25, 0, 0], "1.6": [25, 0, 0] } },
+        "legRight": { "rotation": { "0.0": [-25, 0, 0], "0.8": [25, 0, 0], "1.6": [-25, 0, 0] } },
+        "armLeft":  { "rotation": { "0.0": [-20, 0, 0], "0.8": [20, 0, 0], "1.6": [-20, 0, 0] } },
+        "armRight": { "rotation": { "0.0": [20, 0, 0], "0.8": [-20, 0, 0], "1.6": [20, 0, 0] } }
+      }
+    },
+    "lunge": {
+      "loop": false,
+      "animation_length": 0.7,
+      "bones": {
+        "armLeft":  { "rotation": { "0.0": [0, 0, 0], "0.2": [-120, 0, 0], "0.7": [0, 0, 0] } },
+        "armRight": { "rotation": { "0.0": [0, 0, 0], "0.2": [-120, 0, 0], "0.7": [0, 0, 0] } },
+        "body":     { "rotation": { "0.0": [0, 0, 0], "0.2": [-15, 0, 0], "0.7": [0, 0, 0] } }
+      }
+    },
+    "rage": {
+      "loop": true,
+      "animation_length": 0.5,
+      "bones": {
+        "body": { "rotation": { "0.0": [0, 0, 0], "0.12": [3, 4, -2], "0.25": [-2, -4, 3], "0.37": [2, 2, -1], "0.5": [0, 0, 0] } },
+        "head": { "rotation": { "0.0": [0, 0, 0], "0.25": [-8, 0, 0], "0.5": [0, 0, 0] } }
+      }
+    },
+    "stare": {
+      "loop": true,
+      "animation_length": 1.0,
+      "bones": {
+        "head": { "rotation": { "0.0": [0, 0, 0] } }
+      }
+    }
+  }
+}
