@@ -23,6 +23,7 @@ server-wide progression so you and your friends descend together.
 ---
 
 ## Table of contents
+- [Download](#download)
 - [Features by stage](#features-by-stage)
 - [The three faces of Verity](#the-three-faces-of-verity)
 - [Commands](#commands)
@@ -34,6 +35,22 @@ server-wide progression so you and your friends descend together.
 - [Project structure](#project-structure)
 - [Multiplayer notes](#multiplayer-notes)
 - [Credits & license](#credits--license)
+
+---
+
+## Download
+
+You need **three** things, all for **Minecraft 1.21.1**. Put the two mod jars in
+your `mods/` folder (and on the server too, for multiplayer).
+
+| File | Where to get it | Notes |
+|------|-----------------|-------|
+| **Verity** (this mod) | **[Releases →](https://github.com/kylevoluu-hue/horror-mods-by-kyluua/releases)** | `verity-forge-1.21.1-*.jar`. No release uploaded yet? [Build it from source](#building-from-source) — it's one `./gradlew build`. |
+| **Minecraft Forge 52.1.x** | **[files.minecraftforge.net (1.21.1) →](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.21.1.html)** | The mod loader. Install the **1.21.1** version. |
+| **GeckoLib** (required library) | **[Modrinth →](https://modrinth.com/mod/geckolib)** · **[CurseForge →](https://www.curseforge.com/minecraft/mc-mods/geckolib)** | Animation engine Verity depends on. Use the **Forge 1.21.1** build (4.7.x). |
+
+> **Verity will not load without GeckoLib.** Install both jars, on every client
+> **and** the server. Full step-by-step in [Installation](#installation).
 
 ---
 
