@@ -42,6 +42,16 @@ public class CorruptionData extends SavedData {
     /** True once the final boss has been spawned, so it only triggers once. */
     private boolean bossTriggered;
 
+    /**
+     * Runtime override for the progression speed multiplier, settable by an OP via
+     * {@code /verity rate ...} and persisted. {@code -1} is the sentinel for "unset"
+     * (follow the {@code progressionSpeed} config value instead).
+     */
+    private double rateOverride = -1.0D;
+
+    /** Base corruption gained per second at speed multiplier 1.0. */
+    public static final double BASE_RATE_PER_SECOND = 0.0025D;
+
     public CorruptionData() {}
 
     /** Fetches (or creates) the shared instance. Always stored on the overworld. */
@@ -68,9 +78,10 @@ public class CorruptionData extends SavedData {
      */
     public void tickPlaytime() {
         if (!VerityConfig.SERVER.progressionEnabled.get()) return;
-        // ~0.0025 per second at speed 1.0 => ~100 corruption in roughly 11 hours of
-        // playtime; admins can crank progressionSpeed up for shorter sessions.
-        accumulator += 0.0025D * VerityConfig.SERVER.progressionSpeed.get();
+        // BASE_RATE_PER_SECOND at speed 1.0 => ~100 corruption in roughly 11 hours of
+        // playtime. The effective speed is the OP's runtime override if set, otherwise
+        // the progressionSpeed config (see /verity rate ...).
+        accumulator += BASE_RATE_PER_SECOND * getEffectiveSpeed();
         flushAccumulator();
     }
 
@@ -107,6 +118,54 @@ public class CorruptionData extends SavedData {
 
     public CorruptionStage getStage() {
         return CorruptionStage.fromLevel(level);
+    }
+
+    // =========================================================================
+    //  Rate control (OP-settable, persisted, server-wide)
+    // =========================================================================
+
+    /** The speed multiplier actually used: the runtime override if set, else the config. */
+    public double getEffectiveSpeed() {
+        return rateOverride >= 0 ? rateOverride : VerityConfig.SERVER.progressionSpeed.get();
+    }
+
+    /** True if an OP has set a runtime override (rather than following the config). */
+    public boolean hasRateOverride() {
+        return rateOverride >= 0;
+    }
+
+    /** Sets the runtime speed multiplier (1.0 = default, 2.0 = twice as fast). */
+    public void setSpeedMultiplier(double multiplier) {
+        this.rateOverride = Math.max(0.0D, multiplier);
+        setDirty();
+    }
+
+    /** Clears the override so progression follows the {@code progressionSpeed} config again. */
+    public void resetRate() {
+        this.rateOverride = -1.0D;
+        setDirty();
+    }
+
+    /**
+     * Sets the speed so Verity goes from 0 to fully corrupted in the given number of
+     * real minutes (of accumulated playtime). Converts the target time into the
+     * equivalent multiplier.
+     */
+    public void setTimeToFull(double minutes) {
+        double safeMinutes = Math.max(0.1D, minutes);
+        setSpeedMultiplier(minutesAtSpeedOne() / safeMinutes);
+    }
+
+    /** Estimated real minutes to climb the full 0-100 at the current effective speed. */
+    public double estimatedMinutesToFull() {
+        double speed = getEffectiveSpeed();
+        if (speed <= 0) return Double.POSITIVE_INFINITY;
+        return minutesAtSpeedOne() / speed;
+    }
+
+    /** Minutes to fully corrupt at multiplier 1.0 (~667 min). */
+    private static double minutesAtSpeedOne() {
+        return 100.0D / (BASE_RATE_PER_SECOND * 60.0D);
     }
 
     /** True once corruption has maxed out and the final boss should trigger. */
@@ -154,6 +213,7 @@ public class CorruptionData extends SavedData {
         data.level = tag.getInt("level");
         data.accumulator = tag.getDouble("accumulator");
         data.bossTriggered = tag.getBoolean("bossTriggered");
+        data.rateOverride = tag.contains("rateOverride") ? tag.getDouble("rateOverride") : -1.0D;
         ListTag list = tag.getList("memory", Tag.TAG_COMPOUND);
         for (int i = 0; i < list.size(); i++) {
             CompoundTag e = list.getCompound(i);
@@ -170,6 +230,7 @@ public class CorruptionData extends SavedData {
         tag.putInt("level", level);
         tag.putDouble("accumulator", accumulator);
         tag.putBoolean("bossTriggered", bossTriggered);
+        tag.putDouble("rateOverride", rateOverride);
         ListTag list = new ListTag();
         memory.forEach((id, mem) -> {
             CompoundTag e = new CompoundTag();

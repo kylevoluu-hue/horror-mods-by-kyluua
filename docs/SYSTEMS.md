@@ -28,10 +28,18 @@ persists and is shared by everyone (server-wide progression). It holds:
 - `bossTriggered` so the final event fires once;
 - a map of **`PlayerMemory`** (name, encounter count, last-seen tick) keyed by UUID.
 
-Growth: `tickPlaytime()` runs once per second from real playtime (scaled by
-`progressionSpeed`); `addInteraction()` adds a burst whenever someone talks to or
+Growth: `tickPlaytime()` runs once per second from real playtime (scaled by the
+**effective speed**); `addInteraction()` adds a burst whenever someone talks to or
 opens Verity (scaled by `interactionWeight`). `enableFinalBoss = false` caps the
 level just below transformation.
+
+**OP-settable rate over time.** The per-second growth uses
+`BASE_RATE_PER_SECOND` × `getEffectiveSpeed()`. The effective speed is a persisted,
+server-wide `rateOverride` if an operator set one via `/verity rate ...`, otherwise
+it falls back to the `progressionSpeed` config. `/verity rate time <minutes>`
+converts a desired "minutes to fully corrupt" into the matching multiplier, and
+`/verity rate get` reports the current multiplier plus the estimated minutes to
+reach 100. The override is saved in `CorruptionData`, so it survives restarts.
 
 **`CorruptionStage`** maps the level to one of five stages with weighted thresholds
 (the friendly stages last longest) and provides `progressWithin()` for smooth

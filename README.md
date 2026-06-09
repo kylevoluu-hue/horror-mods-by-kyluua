@@ -85,6 +85,13 @@ level 2 (operator).
 - `/verity corruption set <0-100>` — set the level.
 - `/verity corruption add <-100..100>` — adjust the level.
 - `/verity stage <friendly|unsettling|psychological|hostile|final>` — jump to a stage.
+- `/verity rate get` — show the current corruption-over-time rate and the estimated
+  minutes to fully corrupt.
+- `/verity rate set <multiplier>` — set how fast corruption rises over time
+  (`1.0` = default, `2.0` = twice as fast). Persisted and server-wide.
+- `/verity rate time <minutes>` — set the real minutes of playtime for Verity to go
+  from 0 to fully corrupted (e.g. `/verity rate time 30`).
+- `/verity rate reset` — go back to following the `progressionSpeed` config value.
 - `/verity event scare` — force the scare director to act now.
 - `/verity event boss` — spawn the final boss immediately.
 - `/verity reset` — reset corruption and all transient state.
@@ -142,6 +149,10 @@ gradle wrapper --gradle-version 8.8
 ./gradlew build
 # -> build/libs/verity-forge-1.21.1-1.0.0.jar
 ```
+
+The build produces a **single standard Forge mod `.jar`** as its only artifact.
+GeckoLib is **not** bundled inside it — install GeckoLib alongside Verity (see
+[Installation](#installation)).
 
 Useful run tasks (launch straight from the project):
 ```bash

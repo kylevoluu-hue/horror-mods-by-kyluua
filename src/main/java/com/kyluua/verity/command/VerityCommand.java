@@ -11,6 +11,7 @@ import com.kyluua.verity.registry.VerityEntities;
 import com.kyluua.verity.util.StructureLocator;
 import com.kyluua.verity.util.VeritySpeech;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -77,6 +78,17 @@ public final class VerityCommand {
                     .executes(ctx -> setStage(ctx.getSource(), st)));
         }
         root.then(stage);
+
+        // Corruption rate over time (OP-settable, persisted, server-wide).
+        root.then(Commands.literal("rate").requires(s -> s.hasPermission(2))
+                .then(Commands.literal("get").executes(ctx -> getRate(ctx.getSource())))
+                .then(Commands.literal("set")
+                        .then(Commands.argument("multiplier", DoubleArgumentType.doubleArg(0.0))
+                                .executes(ctx -> setRate(ctx.getSource(), DoubleArgumentType.getDouble(ctx, "multiplier")))))
+                .then(Commands.literal("time")
+                        .then(Commands.argument("minutes", DoubleArgumentType.doubleArg(0.1))
+                                .executes(ctx -> setRateTime(ctx.getSource(), DoubleArgumentType.getDouble(ctx, "minutes")))))
+                .then(Commands.literal("reset").executes(ctx -> resetRate(ctx.getSource()))));
 
         root.then(Commands.literal("event").requires(s -> s.hasPermission(2))
                 .then(Commands.literal("scare").executes(ctx -> forceScare(ctx.getSource())))
@@ -184,6 +196,47 @@ public final class VerityCommand {
 
     private static int setStage(CommandSourceStack source, CorruptionStage stage) {
         return setCorruption(source, stage.threshold);
+    }
+
+    // ---- Corruption rate over time -----------------------------------------
+
+    private static int getRate(CommandSourceStack source) {
+        CorruptionData data = CorruptionData.get(source.getLevel());
+        double speed = data.getEffectiveSpeed();
+        double minutes = data.estimatedMinutesToFull();
+        String src = data.hasRateOverride() ? "command override" : "config (progressionSpeed)";
+        source.sendSuccess(() -> Component.literal(String.format(
+                "Corruption rate: x%.2f (%s). ~%.1f min to go 0 -> 100 of playtime.",
+                speed, src, minutes)).withStyle(ChatFormatting.AQUA), false);
+        return 1;
+    }
+
+    private static int setRate(CommandSourceStack source, double multiplier) {
+        CorruptionData data = CorruptionData.get(source.getLevel());
+        data.setSpeedMultiplier(multiplier);
+        source.sendSuccess(() -> Component.literal(String.format(
+                "Corruption speed set to x%.2f (~%.1f min to fully corrupt).",
+                data.getEffectiveSpeed(), data.estimatedMinutesToFull()))
+                .withStyle(ChatFormatting.GREEN), true);
+        return 1;
+    }
+
+    private static int setRateTime(CommandSourceStack source, double minutes) {
+        CorruptionData data = CorruptionData.get(source.getLevel());
+        data.setTimeToFull(minutes);
+        source.sendSuccess(() -> Component.literal(String.format(
+                "Verity will fully corrupt in ~%.1f min of playtime (speed x%.2f).",
+                minutes, data.getEffectiveSpeed())).withStyle(ChatFormatting.GREEN), true);
+        return 1;
+    }
+
+    private static int resetRate(CommandSourceStack source) {
+        CorruptionData data = CorruptionData.get(source.getLevel());
+        data.resetRate();
+        source.sendSuccess(() -> Component.literal(String.format(
+                "Corruption rate reset to config (x%.2f).", data.getEffectiveSpeed()))
+                .withStyle(ChatFormatting.GREEN), true);
+        return 1;
     }
 
     private static int forceScare(CommandSourceStack source) {

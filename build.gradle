@@ -102,7 +102,12 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
+// The build output is a single, standard Forge mod jar:
+//   build/libs/verity-forge-1.21.1-<version>.jar
+// GeckoLib is NOT bundled - it stays a separate required download (see mods.toml).
 jar {
+    archiveClassifier = ''                          // the mod jar has no classifier
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE  // never fail on duplicate resources
     manifest {
         attributes([
                 'Specification-Title'     : mod_id,
@@ -114,3 +119,6 @@ jar {
         ])
     }
 }
+
+// `./gradlew build` (and `assemble`) produce the mod jar as the only artifact.
+assemble.dependsOn jar
