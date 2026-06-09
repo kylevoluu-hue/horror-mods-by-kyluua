@@ -1,106 +1,75 @@
 // =============================================================================
-//  Verity - build.gradle
-//  Minecraft 1.21.1 / MinecraftForge 52.1.x / ForgeGradle 6 / Java 21
+//  Verity - build.gradle  (NeoForge)
+//  Minecraft 1.21.1 / NeoForge 21.1.x / ModDevGradle 2 / Java 21
 //  Animations powered by GeckoLib.
+//
+//  Produces a single standard NeoForge mod jar:
+//    build/libs/verity-neoforge-1.21.1-<version>.jar
+//  GeckoLib is NOT bundled - it stays a separate required download.
 // =============================================================================
 plugins {
-    // ForgeGradle is the build system used by Forge mods. Version 6 targets MC 1.20.2+.
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'eclipse'
+    // ModDevGradle: the modern NeoForge mod build toolchain.
+    id 'net.neoforged.moddev' version '2.0.123'
     id 'idea'
-    id 'maven-publish'
+    id 'eclipse'
 }
 
-// Pull values from gradle.properties so versions live in one place.
 version = "${mod_version}"
 group   = "${mod_group_id}"
 
 base {
-    archivesName = "${mod_id}-forge-${minecraft_version}"
+    archivesName = "${mod_id}-neoforge-${minecraft_version}"
 }
 
 // Mojang ships Java 21 with 1.21.1 - the mod must compile and run on it.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-minecraft {
-    // Official Mojang mappings (free to use for distribution since 1.16.5+).
-    mappings channel: 'official', version: minecraft_version
+repositories {
+    // GeckoLib (3D model + animation engine) is distributed through Cloudsmith.
+    maven { url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    mavenCentral()
+}
 
-    // Generates a merged access transformer file if present.
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    copyIdeResources = true
+neoForge {
+    // The NeoForge version provides Minecraft + the mod loader at compile/run time.
+    version = "${neoforge_version}"
 
     runs {
-        configureEach {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            // ForgeGradle: register this project's source set as the mod under test.
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
+        client { client() }
+        server { server() }
+    }
 
-        client {
-            property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
-        // Lets you launch a dedicated server straight from the IDE for multiplayer testing.
-        server {
-            property 'forge.enabledGameTestNamespaces', mod_id
-            args '--nogui'
-        }
-
-        // Runs data generators (loot tables, etc.) if you add any DataProviders.
-        data {
-            args '--mod', mod_id, '--all',
-                    '--output', file('src/generated/resources/').getAbsolutePath(),
-                    '--existing', file('src/main/resources/').getAbsolutePath()
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
         }
     }
 }
 
-// Include generated resources in the build output.
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-repositories {
-    // GeckoLib is distributed through Cloudsmith.
-    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-    mavenCentral()
-}
-
 dependencies {
-    // The Forge userdev artifact - provides Minecraft + Forge at compile/run time.
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
-    // GeckoLib - 3D model + animation engine used for Verity's entities.
-    // fg.deobf remaps GeckoLib's published (production-mapped) jar into the dev
-    // mappings so it compiles and runs in this workspace.
-    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+    // GeckoLib for NeoForge - powers Verity's 3D models + animations.
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
 }
 
-// Expand placeholders in mods.toml (modid, version, dependency ranges, ...).
+// Expand placeholders in neoforge.mods.toml (modid, version, dependency ranges).
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [
-            minecraft_version      : minecraft_version,
-            minecraft_version_range: minecraft_version_range,
-            forge_version          : forge_version,
-            forge_version_range    : forge_version_range,
-            loader_version_range   : loader_version_range,
-            mod_id                 : mod_id,
-            mod_name               : mod_name,
-            mod_license            : mod_license,
-            mod_version            : mod_version,
-            mod_authors            : mod_authors,
-            mod_description        : mod_description,
-            geckolib_version_range : geckolib_version_range
+            minecraft_version       : minecraft_version,
+            minecraft_version_range : minecraft_version_range,
+            neoforge_version        : neoforge_version,
+            neoforge_version_range  : neoforge_version_range,
+            loader_version_range    : loader_version_range,
+            mod_id                  : mod_id,
+            mod_name                : mod_name,
+            mod_license             : mod_license,
+            mod_version             : mod_version,
+            mod_authors             : mod_authors,
+            mod_description         : mod_description,
+            geckolib_version_range  : geckolib_version_range
     ]
     inputs.properties replaceProperties
 
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
         expand replaceProperties
     }
 }
@@ -109,23 +78,15 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-// The build output is a single, standard Forge mod jar:
-//   build/libs/verity-forge-1.21.1-<version>.jar
-// GeckoLib is NOT bundled - it stays a separate required download (see mods.toml).
 jar {
-    archiveClassifier = ''                          // the mod jar has no classifier
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE  // never fail on duplicate resources
     manifest {
         attributes([
-                'Specification-Title'     : mod_id,
-                'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : '1',
-                'Implementation-Title'    : project.name,
-                'Implementation-Version'  : project.jar.archiveVersion,
-                'Implementation-Vendor'   : mod_authors
+                'Specification-Title'    : mod_id,
+                'Specification-Vendor'   : mod_authors,
+                'Specification-Version'  : '1',
+                'Implementation-Title'   : project.name,
+                'Implementation-Version' : project.jar.archiveVersion,
+                'Implementation-Vendor'  : mod_authors
         ])
     }
 }
-
-// `./gradlew build` (and `assemble`) produce the mod jar as the only artifact.
-assemble.dependsOn jar

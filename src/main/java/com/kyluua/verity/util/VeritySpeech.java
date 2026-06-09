@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 import javax.annotation.Nullable;
 
@@ -49,7 +49,7 @@ public final class VeritySpeech {
     @Nullable
     public static SoundEvent lookupSound(@Nullable String name) {
         if (name == null || name.isBlank()) return null;
-        return ForgeRegistries.SOUND_EVENTS.getValue(
-                ResourceLocation.fromNamespaceAndPath(Verity.MOD_ID, name));
+        return BuiltInRegistries.SOUND_EVENT.getOptional(
+                ResourceLocation.fromNamespaceAndPath(Verity.MOD_ID, name)).orElse(null);
     }
 }

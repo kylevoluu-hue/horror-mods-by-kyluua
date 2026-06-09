@@ -9,13 +9,13 @@ import com.kyluua.verity.registry.VerityEntities;
 import com.kyluua.verity.registry.VerityItems;
 import com.kyluua.verity.registry.VeritySounds;
 import com.mojang.logging.LogUtils;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
 /**
@@ -77,8 +77,8 @@ public final class Verity {
         // Server ticking, command registration, datapack reload listener, etc.
         // ServerEvents and DialogueManager use instance @SubscribeEvent methods, so
         // they are registered as instances; VerityCommand uses static methods.
-        MinecraftForge.EVENT_BUS.register(new ServerEvents());
-        MinecraftForge.EVENT_BUS.register(VerityCommand.class);
-        MinecraftForge.EVENT_BUS.register(DialogueManager.get());
+        NeoForge.EVENT_BUS.register(new ServerEvents());
+        NeoForge.EVENT_BUS.register(VerityCommand.class);
+        NeoForge.EVENT_BUS.register(DialogueManager.get());
     }
 }

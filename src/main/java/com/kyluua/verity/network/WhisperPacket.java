@@ -7,9 +7,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 /**
  * Server -> client. Plays a positioned whisper/ambient sound at a world location for
@@ -39,7 +37,6 @@ public record WhisperPacket(double x, double y, double z, int soundId, float vol
     }
 
     public static void handle(WhisperPacket pkt, IPayloadContext ctx) {
-        ctx.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> () -> ClientPacketHandlers.onWhisper(pkt)));
+        ctx.enqueueWork(() -> ClientPacketHandlers.onWhisper(pkt));
     }
 }

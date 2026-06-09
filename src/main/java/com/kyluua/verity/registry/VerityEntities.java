@@ -6,10 +6,10 @@ import com.kyluua.verity.entity.VerityBossEntity;
 import com.kyluua.verity.entity.VerityCompanionEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.core.registries.Registries;
+import java.util.function.Supplier;
 
 /**
  * Entity types for Verity, plus their attribute registration.
@@ -23,10 +23,10 @@ public final class VerityEntities {
     private VerityEntities() {}
 
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Verity.MOD_ID);
+            DeferredRegister.create(Registries.ENTITY_TYPE, Verity.MOD_ID);
 
     /** The floating smiley companion. */
-    public static final RegistryObject<EntityType<VerityCompanionEntity>> VERITY_COMPANION =
+    public static final Supplier<EntityType<VerityCompanionEntity>> VERITY_COMPANION =
             ENTITY_TYPES.register("verity_companion",
                     () -> EntityType.Builder.of(VerityCompanionEntity::new, MobCategory.CREATURE)
                             .sized(0.7F, 0.7F)
@@ -34,7 +34,7 @@ public final class VerityEntities {
                             .build("verity_companion"));
 
     /** The tall humanoid final boss. */
-    public static final RegistryObject<EntityType<VerityBossEntity>> VERITY_BOSS =
+    public static final Supplier<EntityType<VerityBossEntity>> VERITY_BOSS =
             ENTITY_TYPES.register("verity_boss",
                     () -> EntityType.Builder.of(VerityBossEntity::new, MobCategory.MONSTER)
                             .sized(0.9F, 3.9F)            // very tall, thin
@@ -43,7 +43,7 @@ public final class VerityEntities {
                             .build("verity_boss"));
 
     /** Player-specific hallucination sighting (usually spawned client-side only). */
-    public static final RegistryObject<EntityType<HallucinationEntity>> HALLUCINATION =
+    public static final Supplier<EntityType<HallucinationEntity>> HALLUCINATION =
             ENTITY_TYPES.register("hallucination",
                     () -> EntityType.Builder.of(HallucinationEntity::new, MobCategory.MISC)
                             .sized(0.6F, 1.95F)

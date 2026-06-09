@@ -1,16 +1,17 @@
-// Repositories that host the ForgeGradle plugin itself.
+// Repositories that host the ModDevGradle plugin + NeoForge toolchain.
 pluginManagement {
     repositories {
         gradlePluginPortal()
+        mavenCentral()
         maven {
-            name = 'MinecraftForge'
-            url = 'https://maven.minecraftforge.net/'
+            name = 'NeoForged'
+            url = 'https://maven.neoforged.net/releases'
         }
     }
 }
 
 plugins {
-    // Speeds up ForgeGradle by caching the heavy Minecraft setup steps.
+    // Auto-provisions the Java 21 toolchain if it isn't already installed.
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
 

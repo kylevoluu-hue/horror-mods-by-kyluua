@@ -4,8 +4,8 @@ import com.kyluua.verity.client.renderer.HallucinationRenderer;
 import com.kyluua.verity.client.renderer.VerityBossRenderer;
 import com.kyluua.verity.client.renderer.VerityCompanionRenderer;
 import com.kyluua.verity.registry.VerityEntities;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 /**
  * Client-only setup. Bound from {@link com.kyluua.verity.Verity} on the mod event

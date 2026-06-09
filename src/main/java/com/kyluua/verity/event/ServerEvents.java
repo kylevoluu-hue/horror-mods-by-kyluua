@@ -18,9 +18,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.bus.api.SubscribeEvent;
 
 import java.util.List;
 
@@ -44,9 +44,8 @@ public final class ServerEvents {
     //  Per-level tick (once per second).
     // =========================================================================
     @SubscribeEvent
-    public void onLevelTick(TickEvent.LevelTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
-        if (!(event.level instanceof ServerLevel level)) return;
+    public void onLevelTick(LevelTickEvent.Post event) {
+        if (!(event.getLevel() instanceof ServerLevel level)) return;
         if (level.getGameTime() % 20L != 0L) return; // once per second
 
         CorruptionData data = CorruptionData.get(level);
@@ -138,12 +137,10 @@ public final class ServerEvents {
     }
 
     private void giveBoxIfFirstTime(ServerPlayer player) {
-        CompoundTag persisted = player.getPersistentData()
-                .getCompound(Player.PERSISTED_NBT_TAG);
+        CompoundTag persisted = player.getPersistentData();
         if (persisted.getBoolean(GOT_BOX_TAG)) return;
 
         persisted.putBoolean(GOT_BOX_TAG, true);
-        player.getPersistentData().put(Player.PERSISTED_NBT_TAG, persisted);
 
         ItemStack box = new ItemStack(VerityItems.VERITY_BOX.get());
         if (!player.getInventory().add(box)) {

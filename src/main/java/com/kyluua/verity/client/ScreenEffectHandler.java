@@ -6,12 +6,12 @@ import com.kyluua.verity.network.ScreenEffectPacket;
 import com.kyluua.verity.progression.CorruptionStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderGuiEvent;
-import net.minecraftforge.client.event.ViewportEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.event.ViewportEvent;
+import net.neoforged.neoforge.event.tick.ClientTickEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.Random;
 
@@ -31,7 +31,7 @@ import java.util.Random;
  * <p>Everything here is gated behind the player's client comfort config, so anyone
  * can soften or disable the visuals without affecting the server.</p>
  */
-@Mod.EventBusSubscriber(modid = Verity.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = Verity.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
 public final class ScreenEffectHandler {
 
     private ScreenEffectHandler() {}
@@ -56,8 +56,7 @@ public final class ScreenEffectHandler {
     //  Tick: decay the active effect.
     // =========================================================================
     @SubscribeEvent
-    public static void onClientTick(TickEvent.ClientTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
+    public static void onClientTick(ClientTickEvent.Post event) {
         if (remainingTicks > 0 && --remainingTicks <= 0) {
             activeEffect = -1;
         }

@@ -1,4 +1,4 @@
-# Verity - mods.toml
+# Verity - neoforge.mods.toml
 # Placeholders wrapped in ${...} are filled in by build.gradle from gradle.properties.
 modLoader = "javafml"
 loaderVersion = "${loader_version_range}"
@@ -17,9 +17,9 @@ logoFile = "verity_logo.png"
 
 # --- Dependencies ------------------------------------------------------------
 [[dependencies.${mod_id}]]
-modId = "forge"
+modId = "neoforge"
 type = "required"
-versionRange = "${forge_version_range}"
+versionRange = "${neoforge_version_range}"
 ordering = "NONE"
 side = "BOTH"
 

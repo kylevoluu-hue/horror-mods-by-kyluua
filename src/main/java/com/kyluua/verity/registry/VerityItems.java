@@ -7,9 +7,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import java.util.function.Supplier;
 
 /**
  * Items and the creative tab for Verity.
@@ -24,21 +23,21 @@ public final class VerityItems {
 
     /** Deferred register for all items in this mod. */
     public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, Verity.MOD_ID);
+            DeferredRegister.create(Registries.ITEM, Verity.MOD_ID);
 
     /** Deferred register for the mod's creative tab. */
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Verity.MOD_ID);
 
     /** The box Verity arrives in. One per player at world start (handed out on first join). */
-    public static final RegistryObject<Item> VERITY_BOX = ITEMS.register("verity_box",
+    public static final Supplier<Item> VERITY_BOX = ITEMS.register("verity_box",
             () -> new VerityBoxItem(new Item.Properties()
                     .stacksTo(1)
                     .rarity(Rarity.UNCOMMON)
                     .fireResistant()));
 
     /** Creative tab that surfaces the box so builders/admins can grab one. */
-    public static final RegistryObject<CreativeModeTab> VERITY_TAB = CREATIVE_TABS.register("verity_tab",
+    public static final Supplier<CreativeModeTab> VERITY_TAB = CREATIVE_TABS.register("verity_tab",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.verity"))
                     .icon(() -> VERITY_BOX.get().getDefaultInstance())

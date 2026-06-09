@@ -7,9 +7,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 /**
  * Server -> client. Spawns a hallucination sighting in the receiving player's
@@ -36,7 +34,6 @@ public record HallucinationPacket(double x, double y, double z, int lifespan, in
     }
 
     public static void handle(HallucinationPacket pkt, IPayloadContext ctx) {
-        ctx.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> () -> ClientPacketHandlers.onHallucination(pkt)));
+        ctx.enqueueWork(() -> ClientPacketHandlers.onHallucination(pkt));
     }
 }

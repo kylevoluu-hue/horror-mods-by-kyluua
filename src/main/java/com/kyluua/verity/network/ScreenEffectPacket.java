@@ -7,9 +7,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 /**
  * Server -> client. Triggers a one-off screen effect on a targeted player.
@@ -41,7 +39,6 @@ public record ScreenEffectPacket(int effect, float intensity, int durationTicks)
     }
 
     public static void handle(ScreenEffectPacket pkt, IPayloadContext ctx) {
-        ctx.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> () -> ClientPacketHandlers.onScreenEffect(pkt)));
+        ctx.enqueueWork(() -> ClientPacketHandlers.onScreenEffect(pkt));
     }
 }

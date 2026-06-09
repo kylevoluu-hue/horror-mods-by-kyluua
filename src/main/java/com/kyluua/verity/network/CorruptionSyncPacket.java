@@ -7,9 +7,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 /**
  * Server -> client. Tells the client the current corruption level + stage so it can
@@ -33,7 +31,6 @@ public record CorruptionSyncPacket(int level, int stage) implements CustomPacket
 
     /** Runs on the client; DistExecutor keeps the client class off the dedicated server. */
     public static void handle(CorruptionSyncPacket pkt, IPayloadContext ctx) {
-        ctx.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> () -> ClientPacketHandlers.onCorruptionSync(pkt)));
+        ctx.enqueueWork(() -> ClientPacketHandlers.onCorruptionSync(pkt));
     }
 }

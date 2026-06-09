@@ -1,6 +1,6 @@
 package com.kyluua.verity;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 /**
@@ -24,21 +24,21 @@ public final class VerityConfig {
     // =========================================================================
     //  SERVER spec
     // =========================================================================
-    public static final ForgeConfigSpec SERVER_SPEC;
+    public static final ModConfigSpec SERVER_SPEC;
     public static final Server SERVER;
 
     // =========================================================================
     //  CLIENT spec
     // =========================================================================
-    public static final ForgeConfigSpec CLIENT_SPEC;
+    public static final ModConfigSpec CLIENT_SPEC;
     public static final Client CLIENT;
 
     static {
-        Pair<Server, ForgeConfigSpec> server = new ForgeConfigSpec.Builder().configure(Server::new);
+        Pair<Server, ModConfigSpec> server = new ModConfigSpec.Builder().configure(Server::new);
         SERVER = server.getLeft();
         SERVER_SPEC = server.getRight();
 
-        Pair<Client, ForgeConfigSpec> client = new ForgeConfigSpec.Builder().configure(Client::new);
+        Pair<Client, ModConfigSpec> client = new ModConfigSpec.Builder().configure(Client::new);
         CLIENT = client.getLeft();
         CLIENT_SPEC = client.getRight();
     }
@@ -49,22 +49,22 @@ public final class VerityConfig {
     public static final class Server {
 
         // --- Progression -----------------------------------------------------
-        public final ForgeConfigSpec.DoubleValue progressionSpeed;
-        public final ForgeConfigSpec.DoubleValue interactionWeight;
-        public final ForgeConfigSpec.BooleanValue progressionEnabled;
-        public final ForgeConfigSpec.IntValue startingCorruption;
+        public final ModConfigSpec.DoubleValue progressionSpeed;
+        public final ModConfigSpec.DoubleValue interactionWeight;
+        public final ModConfigSpec.BooleanValue progressionEnabled;
+        public final ModConfigSpec.IntValue startingCorruption;
 
         // --- Scares ----------------------------------------------------------
-        public final ForgeConfigSpec.DoubleValue scareFrequency;
-        public final ForgeConfigSpec.BooleanValue enableJumpscares;
-        public final ForgeConfigSpec.BooleanValue enableHallucinations;
-        public final ForgeConfigSpec.BooleanValue enableFakeChat;
-        public final ForgeConfigSpec.BooleanValue enableEnvironmentScares;
+        public final ModConfigSpec.DoubleValue scareFrequency;
+        public final ModConfigSpec.BooleanValue enableJumpscares;
+        public final ModConfigSpec.BooleanValue enableHallucinations;
+        public final ModConfigSpec.BooleanValue enableFakeChat;
+        public final ModConfigSpec.BooleanValue enableEnvironmentScares;
 
         // --- Boss ------------------------------------------------------------
-        public final ForgeConfigSpec.BooleanValue enableFinalBoss;
+        public final ModConfigSpec.BooleanValue enableFinalBoss;
 
-        Server(ForgeConfigSpec.Builder b) {
+        Server(ModConfigSpec.Builder b) {
             b.comment("Verity - server gameplay settings.",
                     "These values are shared by everyone on the server.").push("progression");
 
@@ -124,12 +124,12 @@ public final class VerityConfig {
     /** Client-side, per-player comfort configuration. */
     public static final class Client {
 
-        public final ForgeConfigSpec.DoubleValue screenEffectIntensity;
-        public final ForgeConfigSpec.DoubleValue horrorVolume;
-        public final ForgeConfigSpec.BooleanValue enableFog;
-        public final ForgeConfigSpec.BooleanValue enableScreenDistortion;
+        public final ModConfigSpec.DoubleValue screenEffectIntensity;
+        public final ModConfigSpec.DoubleValue horrorVolume;
+        public final ModConfigSpec.BooleanValue enableFog;
+        public final ModConfigSpec.BooleanValue enableScreenDistortion;
 
-        Client(ForgeConfigSpec.Builder b) {
+        Client(ModConfigSpec.Builder b) {
             b.comment("Verity - client comfort settings. These only affect your own game.").push("comfort");
 
             screenEffectIntensity = b

@@ -60,7 +60,7 @@ public final class ClientPacketHandlers {
         // this player ever sees it.
         int id = FAKE_ID.getAndDecrement();
         ghost.setId(id);
-        level.putNonPlayerEntity(id, ghost);
+        level.addEntity(ghost);
     }
 
     // --- Fake chat / join / leave -------------------------------------------

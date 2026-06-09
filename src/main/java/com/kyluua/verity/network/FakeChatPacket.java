@@ -7,9 +7,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 /**
  * Server -> client. Injects a fake message into one player's chat. Used for fake
@@ -39,7 +37,6 @@ public record FakeChatPacket(String text, int kind) implements CustomPacketPaylo
     }
 
     public static void handle(FakeChatPacket pkt, IPayloadContext ctx) {
-        ctx.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> () -> ClientPacketHandlers.onFakeChat(pkt)));
+        ctx.enqueueWork(() -> ClientPacketHandlers.onFakeChat(pkt));
     }
 }

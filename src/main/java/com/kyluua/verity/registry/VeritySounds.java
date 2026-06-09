@@ -3,9 +3,9 @@ package com.kyluua.verity.registry;
 import com.kyluua.verity.Verity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.core.registries.Registries;
+import java.util.function.Supplier;
 
 /**
  * All sound events used by Verity.
@@ -30,38 +30,38 @@ public final class VeritySounds {
     private VeritySounds() {}
 
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
-            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Verity.MOD_ID);
+            DeferredRegister.create(Registries.SOUND_EVENT, Verity.MOD_ID);
 
     // --- Intro ---------------------------------------------------------------
-    public static final RegistryObject<SoundEvent> VOICE_LETMEOUT = register("voice_letmeout");
+    public static final Supplier<SoundEvent> VOICE_LETMEOUT = register("voice_letmeout");
 
     // --- Stage voice sets (multiple takes per stage for variety) -------------
-    public static final RegistryObject<SoundEvent> VOICE_FRIENDLY_1 = register("voice_friendly_1");
-    public static final RegistryObject<SoundEvent> VOICE_FRIENDLY_2 = register("voice_friendly_2");
-    public static final RegistryObject<SoundEvent> VOICE_UNSETTLING_1 = register("voice_unsettling_1");
-    public static final RegistryObject<SoundEvent> VOICE_UNSETTLING_2 = register("voice_unsettling_2");
-    public static final RegistryObject<SoundEvent> VOICE_PSYCH_1 = register("voice_psych_1");
-    public static final RegistryObject<SoundEvent> VOICE_PSYCH_2 = register("voice_psych_2");
-    public static final RegistryObject<SoundEvent> VOICE_HOSTILE_1 = register("voice_hostile_1");
-    public static final RegistryObject<SoundEvent> VOICE_HOSTILE_2 = register("voice_hostile_2");
+    public static final Supplier<SoundEvent> VOICE_FRIENDLY_1 = register("voice_friendly_1");
+    public static final Supplier<SoundEvent> VOICE_FRIENDLY_2 = register("voice_friendly_2");
+    public static final Supplier<SoundEvent> VOICE_UNSETTLING_1 = register("voice_unsettling_1");
+    public static final Supplier<SoundEvent> VOICE_UNSETTLING_2 = register("voice_unsettling_2");
+    public static final Supplier<SoundEvent> VOICE_PSYCH_1 = register("voice_psych_1");
+    public static final Supplier<SoundEvent> VOICE_PSYCH_2 = register("voice_psych_2");
+    public static final Supplier<SoundEvent> VOICE_HOSTILE_1 = register("voice_hostile_1");
+    public static final Supplier<SoundEvent> VOICE_HOSTILE_2 = register("voice_hostile_2");
 
     // --- Atmosphere ----------------------------------------------------------
-    public static final RegistryObject<SoundEvent> WHISPER = register("whisper");
-    public static final RegistryObject<SoundEvent> AMBIENT_DRONE = register("ambient_drone");
-    public static final RegistryObject<SoundEvent> AMBIENT_DISTORTED = register("ambient_distorted");
-    public static final RegistryObject<SoundEvent> HEARTBEAT = register("heartbeat");
+    public static final Supplier<SoundEvent> WHISPER = register("whisper");
+    public static final Supplier<SoundEvent> AMBIENT_DRONE = register("ambient_drone");
+    public static final Supplier<SoundEvent> AMBIENT_DISTORTED = register("ambient_distorted");
+    public static final Supplier<SoundEvent> HEARTBEAT = register("heartbeat");
 
     // --- Scares --------------------------------------------------------------
-    public static final RegistryObject<SoundEvent> JUMPSCARE_STINGER = register("jumpscare_stinger");
-    public static final RegistryObject<SoundEvent> GLITCH = register("glitch");
+    public static final Supplier<SoundEvent> JUMPSCARE_STINGER = register("jumpscare_stinger");
+    public static final Supplier<SoundEvent> GLITCH = register("glitch");
 
     // --- Boss ----------------------------------------------------------------
-    public static final RegistryObject<SoundEvent> BOSS_SPAWN = register("boss_spawn");
-    public static final RegistryObject<SoundEvent> BOSS_MUSIC = register("boss_music");
-    public static final RegistryObject<SoundEvent> BOSS_ROAR = register("boss_roar");
+    public static final Supplier<SoundEvent> BOSS_SPAWN = register("boss_spawn");
+    public static final Supplier<SoundEvent> BOSS_MUSIC = register("boss_music");
+    public static final Supplier<SoundEvent> BOSS_ROAR = register("boss_roar");
 
     /** Helper: registers a SoundEvent under {@code verity:<name>}. */
-    private static RegistryObject<SoundEvent> register(String name) {
+    private static Supplier<SoundEvent> register(String name) {
         return SOUND_EVENTS.register(name,
                 () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Verity.MOD_ID, name)));
     }
