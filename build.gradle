@@ -51,28 +51,9 @@ dependencies {
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
 }
 
-// Expand placeholders in neoforge.mods.toml (modid, version, dependency ranges).
-tasks.named('processResources', ProcessResources).configure {
-    var replaceProperties = [
-            minecraft_version       : minecraft_version,
-            minecraft_version_range : minecraft_version_range,
-            neoforge_version        : neoforge_version,
-            neoforge_version_range  : neoforge_version_range,
-            loader_version_range    : loader_version_range,
-            mod_id                  : mod_id,
-            mod_name                : mod_name,
-            mod_license             : mod_license,
-            mod_version             : mod_version,
-            mod_authors             : mod_authors,
-            mod_description         : mod_description,
-            geckolib_version_range  : geckolib_version_range
-    ]
-    inputs.properties replaceProperties
-
-    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties
-    }
-}
+// neoforge.mods.toml and pack.mcmeta use static literal values (no Gradle
+// templating), so processResources just copies them verbatim - this avoids the
+// Groovy SimpleTemplateEngine that expand() would otherwise run on them.
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'

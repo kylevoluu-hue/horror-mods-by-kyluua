@@ -1,39 +1,36 @@
-# Verity - neoforge.mods.toml
-# Placeholders wrapped in ${...} are filled in by build.gradle from gradle.properties.
+# Verity - neoforge.mods.toml  (static values; no Gradle templating)
 modLoader = "javafml"
-loaderVersion = "${loader_version_range}"
-license = "${mod_license}"
+loaderVersion = "[1,)"
+license = "MIT"
 issueTrackerURL = "https://github.com/kylevoluu-hue/horror-mods-by-kyluua/issues"
 
 [[mods]]
-modId = "${mod_id}"
-version = "${mod_version}"
-displayName = "${mod_name}"
-authors = "${mod_authors}"
-description = '''
-${mod_description}
-'''
+modId = "verity"
+version = "1.0.0"
+displayName = "Verity"
+authors = "kyluua"
+description = "A psychological horror companion mod. Verity starts as a friendly floating smiley AI and slowly turns into something else."
 logoFile = "verity_logo.png"
 
 # --- Dependencies ------------------------------------------------------------
-[[dependencies.${mod_id}]]
+[[dependencies.verity]]
 modId = "neoforge"
 type = "required"
-versionRange = "${neoforge_version_range}"
+versionRange = "[21.1,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.verity]]
 modId = "minecraft"
 type = "required"
-versionRange = "${minecraft_version_range}"
+versionRange = "[1.21.1,1.21.2)"
 ordering = "NONE"
 side = "BOTH"
 
 # GeckoLib powers Verity's 3D models + animations. Players/servers must install it.
-[[dependencies.${mod_id}]]
+[[dependencies.verity]]
 modId = "geckolib"
 type = "required"
-versionRange = "${geckolib_version_range}"
+versionRange = "[4.6,)"
 ordering = "AFTER"
 side = "BOTH"
